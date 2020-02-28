@@ -30,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         // create notification channel
         createNotificationChannel()
 
+        setNotificationButtonStyle(
+            isNotifyEnabled = true,
+            isUpdateEnabled = false,
+            isCancelEnabled = false
+        )
+
         notify.setOnClickListener {
             sendNotifications()
         }
@@ -77,6 +83,11 @@ class MainActivity : AppCompatActivity() {
     private fun sendNotifications() {
         val notifyBuilder = getNotificationBuilder()
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build())
+        setNotificationButtonStyle(
+            isNotifyEnabled = false,
+            isUpdateEnabled = true,
+            isCancelEnabled = true
+        )
     }
 
     private fun updateNotifications() {
@@ -86,9 +97,28 @@ class MainActivity : AppCompatActivity() {
             .bigPicture(image)
             .setBigContentTitle(getString(R.string.notification_updated)))
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build())
+        setNotificationButtonStyle(
+            isNotifyEnabled = false,
+            isUpdateEnabled = false,
+            isCancelEnabled = true
+        )
+
     }
 
     private fun cancelNotifications() {
         mNotifyManager.cancel(NOTIFICATION_ID)
+        setNotificationButtonStyle(
+            isNotifyEnabled = true,
+            isUpdateEnabled = false,
+            isCancelEnabled = false
+        )
+    }
+
+    private fun setNotificationButtonStyle
+                (isNotifyEnabled: Boolean, isUpdateEnabled: Boolean, isCancelEnabled: Boolean) {
+
+        notify.isEnabled = isNotifyEnabled
+        update.isEnabled = isUpdateEnabled
+        cancel.isEnabled = isCancelEnabled
     }
 }
