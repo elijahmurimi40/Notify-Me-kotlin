@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     enableLights(true)
                     lightColor = Color.RED
                     enableVibration(true)
-                    description = "Notification from Notify Me"
+                    description = getString(R.string.notification_from_notify_me)
                 }
 
             mNotifyManager.createNotificationChannel(channel)

@@ -13,4 +13,5 @@
     <string name="notification_text">This is your notification text.</string>
     <string name="notification_updated">Notification Updated!</string>
     <string name="update_notification">Update Notification</string>
+    <string name="notification_from_notify_me">Notification from Notify Me</string>
 </resources>
