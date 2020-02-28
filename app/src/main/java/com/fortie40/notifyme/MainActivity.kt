@@ -2,7 +2,9 @@ package com.fortie40.notifyme
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -50,11 +52,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getNotificationBuilder(): NotificationCompat.Builder {
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        val notificationPendingIntent = PendingIntent.getActivity(this, NOTIFICATION_ID,
+            notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         return NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
             .setContentTitle(getString(R.string.notification_title))
             .setContentText(getString(R.string.notification_text))
             .setSmallIcon(R.drawable.ic_notification_icon)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setContentIntent(notificationPendingIntent)
+            .setAutoCancel(true)
     }
 
     private fun sendNotifications() {
