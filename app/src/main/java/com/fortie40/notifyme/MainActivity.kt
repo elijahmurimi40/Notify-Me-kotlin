@@ -3,8 +3,10 @@ package com.fortie40.notifyme
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
@@ -18,9 +20,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val PRIMARY_CHANNEL_ID = "primary_notification_channel"
         const val NOTIFICATION_ID = 0
+        const val ACTION_UPDATE_NOTIFICATION = "com.fortie40.notifyme.ACTION_UPDATE_NOTIFICATION"
     }
 
     private lateinit var mNotifyManager: NotificationManager
+    private val mReciver = NotificationReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,13 @@ class MainActivity : AppCompatActivity() {
         cancel.setOnClickListener {
             cancelNotifications()
         }
+
+        registerReceiver(mReciver, IntentFilter(ACTION_UPDATE_NOTIFICATION))
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(mReciver)
+        super.onDestroy()
     }
 
     private fun createNotificationChannel() {
@@ -81,7 +92,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendNotifications() {
+        val updateIntent = Intent(ACTION_UPDATE_NOTIFICATION)
+        val updatePendingIntent = PendingIntent.getBroadcast(this,
+            NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT)
         val notifyBuilder = getNotificationBuilder()
+        notifyBuilder.addAction(R.drawable.ic_action_name, getString(R.string.notification_updated),
+            updatePendingIntent)
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build())
         setNotificationButtonStyle(
             isNotifyEnabled = false,
@@ -90,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun updateNotifications() {
+    fun updateNotifications() {
         val image = BitmapFactory.decodeResource(resources, R.drawable.mascot_1)
         val notifyBuilder = getNotificationBuilder()
         notifyBuilder.setStyle(NotificationCompat.BigPictureStyle()
@@ -120,5 +136,11 @@ class MainActivity : AppCompatActivity() {
         notify.isEnabled = isNotifyEnabled
         update.isEnabled = isUpdateEnabled
         cancel.isEnabled = isCancelEnabled
+    }
+
+    inner class NotificationReceiver : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            updateNotifications()
+        }
     }
 }
