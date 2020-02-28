@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         val updatePendingIntent = PendingIntent.getBroadcast(this,
             NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT)
         val notifyBuilder = getNotificationBuilder()
-        notifyBuilder.addAction(R.drawable.ic_action_name, getString(R.string.notification_updated),
+        notifyBuilder.addAction(R.drawable.ic_action_name, getString(R.string.update_notification),
             updatePendingIntent)
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build())
         setNotificationButtonStyle(
