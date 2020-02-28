@@ -32,6 +32,14 @@ class MainActivity : AppCompatActivity() {
         notify.setOnClickListener {
             sendNotifications()
         }
+
+        update.setOnClickListener {
+            updateNotifications()
+        }
+
+        cancel.setOnClickListener {
+            cancelNotifications()
+        }
     }
 
     private fun createNotificationChannel() {
@@ -68,5 +76,13 @@ class MainActivity : AppCompatActivity() {
     private fun sendNotifications() {
         val notifyBuilder = getNotificationBuilder()
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build())
+    }
+
+    private fun updateNotifications() {
+        //
+    }
+
+    private fun cancelNotifications() {
+        mNotifyManager.cancel(NOTIFICATION_ID)
     }
 }
