@@ -6,4 +6,9 @@
     <string name="notify_me">Notify me!</string>
     <string name="update_me">Update Me!</string>
     <string name="cancel_me">Cancel me!</string>
+
+    <!-- Main activity -->
+    <string name="notify_me_notification">Notify Me Notification</string>
+    <string name="notification_title">You\'ve been notified!</string>
+    <string name="notification_text">This is your notification text.</string>
 </resources>
