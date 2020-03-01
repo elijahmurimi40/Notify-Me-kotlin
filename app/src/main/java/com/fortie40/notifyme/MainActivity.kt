@@ -78,9 +78,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getNotificationBuilder(): NotificationCompat.Builder {
-        val notificationIntent = Intent(this, MainActivity::class.java)
+        val notificationIntent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         val notificationPendingIntent = PendingIntent.getActivity(this, NOTIFICATION_ID,
-            notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            notificationIntent, 0)
         return NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
             .setContentTitle(getString(R.string.notification_title))
             .setContentText(getString(R.string.notification_text))
