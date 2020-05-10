@@ -1,3 +1,7 @@
+<p align="center"><img 
+	src="https://user-images.githubusercontent.com/25055256/81497160-6b9ec000-92c5-11ea-86c0-902aa1bb34cf.png" 
+	alt="Logo" width="40px" height="40px" /></p>
+  
 # Notify-Me-kotlin
 Notify Me! is an app that lets the user trigger, update, and cancel a notification using three buttons
 
