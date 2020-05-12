@@ -7,6 +7,14 @@ Notify Me! is an app that lets the user trigger, update, and cancel a notificati
 
 Minimum Android Version 5.0 (Lollipop)
 
+### Demo
+<img src="demo/NotifyMe1.gif" alt="Demo" height="500px" />
+
+
+
+### Notification Action Button
+<img src="demo/NotifyMe2.gif" alt="Demo" height="500px" />
+
 ### License
 
 MIT License
